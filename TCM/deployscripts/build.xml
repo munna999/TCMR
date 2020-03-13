@@ -1,4 +1,4 @@
-<project name="Tcm" default="deployCodeCheckOnly" basedir="." xmlns:sf="antlib:com.salesforce">
+<project name="Tcm" default="predeployCodeCheckOnly" basedir="." xmlns:sf="antlib:com.salesforce">
     <property name="sf.sessionId"  value=""/>
     <property name="sf.maxPoll"  value="5000"/>
     <condition property="sf.sessionId" value=""> <not> 
@@ -12,14 +12,14 @@
     </taskdef>
  
        
-  <target name="deployCodeCheckOnly">
-        <echo>deployCodeCheckOnly_${sf.username}</echo>
+  <target name="predeployCodeCheckOnly">
+        <echo>predeployCodeCheckOnly_${sf.username}</echo>
           <sf:deploy username="${sf.username}" password="${sf.password}"
              sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}"
              deployRoot="../src" checkOnly="true"/>
     </target>
   
-    <target name="deployCode" depends="deployCodeCheckOnly">
+    <target name="deployCode" depends="predeployCodeCheckOnly">
          <echo>deployCode_${sf.username}</echo>
           <sf:deploy username="${sf.username}" password="${sf.password}"
              sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}"
